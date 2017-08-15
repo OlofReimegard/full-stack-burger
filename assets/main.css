@@ -1,0 +1,89 @@
+body {
+    background-image: url("./background.jpg");
+    -webkit-transition: background-image 0.2s ease-in-out;
+    transition: background-image 0.2s ease-in-out;
+    background-size: cover;
+    display: flex;
+}
+
+.fp {
+    position: absolute;
+    top:0;
+    height:100vh;
+    left:0;
+    width:100vw;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fp-logo {
+    position: relative;
+    box-sizing: border-box;
+    background: url("./Logga_burgerz.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height:400px;
+    width:400px;
+    z-index: 101;
+    transition: transform ease .3s;
+    cursor: pointer;
+}
+.fp-logo:hover {
+    transform: scale(.95);
+    transition: transform ease .3s;
+}
+
+.burger {
+    display: none;
+}
+canvas {
+    position: absolute;
+    z-index: 1;
+    box-sizing: border-box;
+}
+
+.outer-border {
+    position: absolute;
+    box-sizing: border-box;
+    width:30vw;
+    height:80vh;
+    right: 8vw;
+    bottom:10vh;
+    border: black solid;
+    border-width: 0 0 0 5px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.right-top-box {
+    width: 80%;
+
+}
+
+.ingredients{
+    width: 80%;
+    height:40vh;
+    overflow: scroll;
+}
+
+.price-and-order {
+    height: 10vh;
+    width: 80%;
+    background-color: black;
+    display: flex;
+}
+
+.price {
+    width: 60%;
+    color: white;
+}
+
+.order-btn {
+    width: 40%;
+    background-color: white;
+    cursor: pointer;
+}
