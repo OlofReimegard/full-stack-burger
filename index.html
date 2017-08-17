@@ -7,34 +7,59 @@
 			body { margin: 0; }
 			canvas { width: 100%; height: 100% }
 		</style>
+		<link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet">
 		<link rel="stylesheet" href="./main.css">
 	</head>
 	<body>
 		<div class="fp">
 			<div class="fp-logo"></div>
-		</div>
-		<div class="burger-menu">
-			<div class="burger-icon"></div>
+			<h2 class="fp-text">Hello and welcome to Full Stack Burger, our goal is simple : your burger. the way you want it! Make a burger in our burger stacker and we'll make it and deliver it to your home!</h2>
+			<div class="fp-btn"><h2>Make a burger</h2></div>
 		</div>
 		<div class="burger">
+			<div class="burger-menu burger-off"></div>
+			<div class="ingredients-stack"></div>
 			<div class="outer-border">
-				<div class="right-top-box">
-					<h2 class="price">Pick your toppings</h2>
-					<p>Lorem ipsum, your moms a dim-sum, your dad aint shit son, look at the flick of the wrist son</p>
+				<div class="first center">
+					<div class="right-top-box">
+						<h2>STACK YOUR BURGER</h2>
+						<p>Lorem ipsum, your moms a dim-sum, your dad aint shit son, look at the flick of the wrist son</p>
+					</div>
+					<div class="fade-top"></div>
+						<div class="ingredients">
+							<h3 class="ingredient-title">PATTIES</h3>
+							<div class="ingredient" id="2"><h4>Beef</h4><h4>2€</h4></div>
+							<div class="ingredient" id="11"><h4>Halloumi</h4><h4>2€</h4></div>
+							<h3 class="ingredient-title">VEGGIES</h3>
+							<div class="ingredient" id="1"><h4>salad</h4><h4>50c</h4></div>
+							<div class="ingredient" id="4"><h4>tomatoes</h4><h4>50c</h4></div>
+							<div class="ingredient" id="9"><h4>onion</h4><h4>50c</h4></div>
+							<div class="ingredient" id="5"><h4>pickles</h4><h4>50c</h4></div>
+							<h3 class="ingredient-title">SAUCES</h3>
+							<div class="ingredient" id="6"><h4>mayo</h4><h4>50c</h4></div>
+							<div class="ingredient" id="7"><h4>ketchup</h4><h4>50c</h4></div>
+							<div class="ingredient" id="8"><h4>szechuan sauce</h4><h4>50c</h4></div>
+							<h3 class="ingredient-title">EXTRAS</h3>
+							<div class="ingredient" id="0"><h4>bun</h4><h4>50c</h4></div>
+							<div class="ingredient" id="3"><h4>cheese</h4><h4>50c</h4></div>
+						</div>
+					<div class="fade-bottom"></div>
+					<div class="price-and-order">
+						<h2 class="price"></h2>
+						<div id="10" class="order-btn ingredient"><h2>Next</h2></div>
+					</div>
 				</div>
-				<div class="ingredients">
-					<h1 id="0 1">extra bun</h1>
-					<h1 id="2 3">salad</h1>
-					<h1 id="4 5">patty</h1>
-					<h1 id="6 7">cheese</h1>
-					<h1 id="8 9">tomatoes</h1>
-					<h1 id="10 11">pickles</h1>
-					<h1 id="12 13">mayo</h1>
-					<h1 id="14 15">bun</h1>
-				</div>
-				<div class="price-and-order">
-					<h2 class="price">8.45€</h2>
-					<div class="order-btn"></div>
+				<div class="second right">
+					<div class="right-top-box">
+						<h2>SIDE ORDERS</h2>
+						<p>Would you like soda and fries with that?</p>
+					</div>
+					<div class="side-order off" id="12">Fries</div>
+					<div class="side-order off" id="13">Drink</div>
+					<div class="price-and-order">
+						<h2 class="price"></h2>
+						<div id="10" class="order-btn ingredient"><h2>Order</h2></div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -43,10 +68,9 @@
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/85/three.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-		<script src="/MTLLoader.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.5/dat.gui.min.js"></script>
+
 		<script src="/OBJLoader.js"></script>
-		<script src="/STLLoader.js"></script>
-		<script src="/TextureLoader.js"></script>
 		<script src="/burgerloader.js"></script>
 		<script src="/tween.js"></script>
         <script src="/script.js"></script>

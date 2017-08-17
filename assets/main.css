@@ -1,21 +1,30 @@
+* {
+    margin: 0;
+}
 body {
+    font-family: 'Fugaz One', cursive;
     background-image: url("./background.jpg");
-    -webkit-transition: background-image 0.2s ease-in-out;
-    transition: background-image 0.2s ease-in-out;
-    background-size: cover;
+    background-size: 100vw 300vh;
+    background-position: top;
+    -webkit-transition:background-position 1.2s ease;
+
     display: flex;
 }
 
 .fp {
     position: absolute;
+    overflow: visible;
     top:0;
     height:100vh;
     left:0;
     width:100vw;
 
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
+    display: none;
+    transition: top 1.2s ease
 }
 .fp-logo {
     position: relative;
@@ -24,17 +33,45 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    height:400px;
-    width:400px;
+    /*height:20vh;*/
+    width:20vw;
+    height:20vw;
     z-index: 101;
+    transform: translateX(-.5vw);
+
+}
+
+.fp-text {
+    position: relative;
+    width:600px;
+    z-index: 102;
+    text-align: center;
+}
+.fp-btn {
+    position: relative;
+    width:20vw;
+    height:5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color:#FFE87E
     transition: transform ease .3s;
+    z-index: 103;
     cursor: pointer;
 }
-.fp-logo:hover {
+.fp-btn h2 {
+    color:#FFE87E
+
+}
+.fp-btn:hover {
     transform: scale(.95);
     transition: transform ease .3s;
 }
-
+.fp-btn:hover .fp-btn h2 {
+    transform: scale(.95);
+    transition: transform ease .3s;
+}
 .burger {
     display: none;
 }
@@ -47,43 +84,180 @@ canvas {
 .outer-border {
     position: absolute;
     box-sizing: border-box;
-    width:30vw;
+    width:40vw;
     height:80vh;
-    right: 8vw;
+    right: -40vw;
     bottom:10vh;
     border: black solid;
     border-width: 0 0 0 5px;
     z-index: 100;
     display: flex;
-    flex-direction: column;
+    overflow: hidden;
+    /*flex-direction: column;*/
     justify-content: space-between;
-    align-items: center;
+    align-items: space-between;
+
+    transition: right .9s;
 }
 .right-top-box {
-    width: 80%;
 
+    width: 70%;
+    margin: 0 15% 5% 15%;
+}
+.right-top-box h2 {
+    margin: 0;
 }
 
 .ingredients{
-    width: 80%;
+    width: 70%;
+    margin: 0 15% 0 15%;
     height:40vh;
-    overflow: scroll;
+    overflow-y: scroll;
+}
+.ingredient{
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    margin: 2px 0 2px 0;
+    background-color: rgba(255,255,255,0);
+    transition: background-color .3s ease
+}
+.ingredient:not(.order-btn){
+    margin-right: 3vw;
+}
+.ingredient:last-child:not(.order-btn){
+    margin-bottom: 20px;
+}
+.fade-top {
+    width: calc(80% - 12px);
+    margin-left: 10%;
+    height:5px;
+    transform: translateY(5px);
+    background: linear-gradient(to bottom, rgba(254, 236, 128,1) 0%,rgba(251,251,251,0) 100%);
+}
+.fade-bottom {
+    width: calc(80% - 12px);
+    margin-left: 10%;
+    margin-bottom: 5%;
+    height:5px;
+    transform: translateY(-5px);
+    background: linear-gradient(to top, rgba(254, 236, 128,1) 0%,rgba(251,251,251,0) 100%);
+}
+.center {
+    right: 0;
+    transition: right 2s
+
+}
+.right {
+    right: -40vw;
+    transition: right 2s
+
+}
+.left {
+    right:40vw;
+    transition: right 2s
+
+}
+
+.first, .second {
+    width:40vw;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.ingredients>.ingredient:hover {
+    transition: background-color .3s ease;
+    background-color: rgba(254, 184, 89, .5);
+}
+
+.ingredient-title:not(.ingredient-title:first-child){
+    border-bottom: .2em solid black;
+    display: inline-block;
+    margin-top: 20px;
+
+}
+.ingredients::-webkit-scrollbar-track
+{
+
+
+	background-color: black;
+}
+
+.ingredients::-webkit-scrollbar
+{
+	width: 12px;
+
+	background-color: black;
+}
+
+.ingredients::-webkit-scrollbar-thumb
+{
+
+
+	background-color: white;
+}
+.burger-menu {
+    width:3vw;
+    height:3vw;
+    background-image: url("./burger-menu.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 250;
+    top:1vw;
+    left: 1vw;
+}
+.ingredients-stack {
+    display: none;
+    position: absolute;
+    top:4vw;
+    left: 4vw;
+    min-width: 10vw;
+    flex-direction: column;
+    z-index: 2000
+}
+
+.burger-menu-item {
+    background-color: rgba(255,255,255,.3);
+    position: relative;
+    .5vw 0 .5vw 1vw;
+    z-index: 3000;
+}
+.burger-menu-item:hover {
+    background-color: rgba(255,0,0,.6);
+}
+
+.side-order {
+    margin:0 15% 5% 15%;
 }
 
 .price-and-order {
-    height: 10vh;
-    width: 80%;
+    height: 5vw;
+    width: 54%;
+    box-sizing: border-box;
+    margin: 0 21% 0 21%;
     background-color: black;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 
 .price {
     width: 60%;
-    color: white;
+    color:white;
+
 }
 
 .order-btn {
     width: 40%;
-    background-color: white;
-    cursor: pointer;
+    display: flex;
+    justify-content: center;
+
+}
+.order-btn h2 {
+    color: rgba(254, 236, 128,1);
+
 }
