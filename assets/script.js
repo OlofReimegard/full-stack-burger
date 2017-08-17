@@ -51,6 +51,7 @@ $(document).ready(function(){
     var moveThing,stackHeight;
 
     Promise.all([loadSalad,loadHalloumi,loadUpperSauce,loadKetchup,loadSzechuan,loadBBun,loadPatty,loadCheese,loadPickles,loadTomatoes,loadTopBun,loadOnion,loadFries,loadSoda]).then(values => {
+        $(".load-img").fadeOut();
         $(".fp").fadeIn(1500).css("display","flex");
         stackHeight = bottomBunBox;
 
@@ -92,11 +93,12 @@ $(document).ready(function(){
         ];
         var ingredientsList = []
         moveThing = function (ingredient, ingredientBox) {
+            console.log(ingredientsList);
             var newingredient = ingredient.clone();
             newingredient.height = ingredient.height;
             newingredient.price = ingredient.price;
             newingredient.number = ingredientsList.length;
-            ingredientsList.push([newingredient,newingredient.number]);
+            ingredientsList.push([newingredient,newingredient.number,newingredient.name,newingredient.price]);
             console.log("once");
             scene.add(newingredient)
 
@@ -111,12 +113,13 @@ $(document).ready(function(){
 
             tween.start();
             $("<p class='burger-menu-item' id='"+newingredient.number+"'>"+newingredient.name+"</p>").prependTo($(".ingredients-stack"));
+
             $(".burger-menu-item").unbind("click").click(function(e){
                 console.log("once here",e.target);
                 removeMesh(ingredientsList[e.target.id][0]);
                 moveDown(e.target.id,ingredientsList[e.target.id][0].height);
                 stackHeight -= ingredientsList[e.target.id][0].height;
-                // ingredientsList.splice(e.target.id);
+                ingredientsList[e.target.id].push("removed");
                 $(e.target).remove();
             });
             price += ingredient.price;
@@ -157,6 +160,10 @@ $(document).ready(function(){
         var addSide = function (ingredient) {
 
             var newingredient = ingredient.clone();
+            newingredient.number = ingredientsList.length;
+            newingredient.price = ingredient.price;
+            newingredient.name = ingredient.name;
+            ingredientsList.push([newingredient,newingredient.number,newingredient.name,newingredient.price]);
             scene.add(newingredient);
 
             var position = {y: 200};
@@ -296,6 +303,21 @@ $(document).ready(function(){
                     addSide(stackArr[numbers][0]);
                 }
 
+            });
+        });
+
+        $(".payment-btn").click(function(){
+            $(".second").removeClass("center").addClass("left");
+            $(".third").removeClass("right").addClass("center");
+
+
+            $(".final-btn").click(function() {
+                $("<div id='final-modal'><h1>Your burger is being made and will be delivered to your address ASAP!<br> Thank you for choosing Full Stack Burger </h1></div>").appendTo($("body")).fadeIn().css("display","flex");
+                var order = ingredientsList.filter((ingredient) => {
+                    return !ingredient[4];
+                });
+                console.log(order);
+                $.post("/order",{order:order});
             });
         });
 

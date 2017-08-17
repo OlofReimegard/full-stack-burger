@@ -378,6 +378,7 @@ var loadFries = new Promise(function(resolve, reject) {
             fries.position.y = 200;
 
             fries.price = 1;
+            fries.name = "fries"
             fries.add(object)
             resolve(fries);
 
@@ -435,6 +436,7 @@ var loadSoda = new Promise(function(resolve, reject) {
                 soda.position.y = 200;
 
                 soda.price = 1;
+                soda.name = "soda";
                 soda.add(object);
                 resolve(soda);
 

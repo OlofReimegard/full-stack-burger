@@ -159,7 +159,7 @@ canvas {
 
 }
 
-.first, .second {
+.first, .second, .third {
     width:40vw;
     position: absolute;
     display: flex;
@@ -199,26 +199,28 @@ canvas {
 	background-color: white;
 }
 .burger-menu {
-    width:3vw;
-    height:3vw;
+    width:3em;
+    height:3em;
     background-image: url("./burger-menu.svg");
     background-size: contain;
     background-repeat: no-repeat;
     position: absolute;
     z-index: 250;
-    top:1vw;
-    left: 1vw;
+    top:10vh;
+    left: 2vw;
 }
 .ingredients-stack {
     display: none;
     position: absolute;
-    top:4vw;
-    left: 4vw;
+    top:16vh;
+    left: calc(2vw + 3em);
     min-width: 10vw;
     flex-direction: column;
     z-index: 2000
 }
-
+.burger-menu-item:last-child {
+    display: none;
+}
 .burger-menu-item {
     background-color: rgba(255,255,255,.3);
     position: relative;
@@ -246,9 +248,19 @@ canvas {
 }
 
 .price {
-    width: 60%;
-    color:white;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: absolute;
+    top: 13vh;
+    right: 43vw;
+    width: 5em;
+    height: 5em;
+    background-image: url("./price.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: invert();
 }
 
 .order-btn {
@@ -257,7 +269,50 @@ canvas {
     justify-content: center;
 
 }
-.order-btn h2 {
+.order-btn h2,.payment-btn h2,.final-btn h2 {
     color: rgba(254, 236, 128,1);
+
+}
+
+.delivery-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.delivery-info input {
+    width: 70%;
+    margin: 0 15% 0 15%;
+    border: none;
+    background-color: transparent;
+    border-bottom: black 2px solid;
+    font-size: 1em;
+    margin-bottom: 1em;
+}
+
+#final-modal {
+    position: absolute;
+    height:100vh;
+    width:100vw;
+    z-index:20000;
+    background: rgba(0,0,0,.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#final-modal h1 {
+    color: rgba(254, 236, 128,1);
+    width: 50vw;
+    text-align: center;
+
+}
+
+.load-img {
+    position: absolute;
+    left:35vw;
+    top:50%;
+    width:30vw;
+    text-align: center;
+
 
 }

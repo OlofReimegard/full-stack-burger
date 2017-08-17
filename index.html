@@ -9,8 +9,10 @@
 		</style>
 		<link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet">
 		<link rel="stylesheet" href="./main.css">
+		<link rel="icon" href="./burger-menu-01.png">
 	</head>
 	<body>
+		<h1 class="load-img">LOADING</h1>
 		<div class="fp">
 			<div class="fp-logo"></div>
 			<h2 class="fp-text">Hello and welcome to Full Stack Burger, our goal is simple : your burger. the way you want it! Make a burger in our burger stacker and we'll make it and deliver it to your home!</h2>
@@ -19,6 +21,7 @@
 		<div class="burger">
 			<div class="burger-menu burger-off"></div>
 			<div class="ingredients-stack"></div>
+			<h2 class="price"></h2>
 			<div class="outer-border">
 				<div class="first center">
 					<div class="right-top-box">
@@ -45,7 +48,7 @@
 						</div>
 					<div class="fade-bottom"></div>
 					<div class="price-and-order">
-						<h2 class="price"></h2>
+
 						<div id="10" class="order-btn ingredient"><h2>Next</h2></div>
 					</div>
 				</div>
@@ -57,8 +60,21 @@
 					<div class="side-order off" id="12">Fries</div>
 					<div class="side-order off" id="13">Drink</div>
 					<div class="price-and-order">
-						<h2 class="price"></h2>
-						<div id="10" class="order-btn ingredient"><h2>Order</h2></div>
+						<div class="payment-btn"><h2>Delivery</h2></div>
+					</div>
+				</div>
+				<div class="third right">
+					<div class="right-top-box">
+						<h2>DELIVERY & PAYMENT</h2>
+						<p>Enter your delivery address</p>
+					</div>
+					<div class="delivery-info">
+						<input type="text" placeholder="Name"></input>
+						<input type="text" placeholder="Adress"></input>
+						<input type="text" placeholder="Email"></input>
+					</div>
+					<div class="price-and-order">
+						<div class="final-btn"><h2>Order</h2></div>
 					</div>
 				</div>
 			</div>
