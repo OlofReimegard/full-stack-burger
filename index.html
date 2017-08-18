@@ -16,10 +16,11 @@
 		<div class="fp">
 			<div class="fp-logo"></div>
 			<h2 class="fp-text">Hello and welcome to Full Stack Burger, our goal is simple : your burger. the way you want it! Make a burger in our burger stacker and we'll make it and deliver it to your home!</h2>
-			<div class="fp-btn"><h2>Make a burger</h2></div>
+			<div class="fp-btn"><h2 class="fp-text">Make a burger</h2></div>
 		</div>
 		<div class="burger">
 			<div class="burger-menu burger-off"></div>
+			<!-- <div class="burger-menu-text"><h3>EDIT</h3></div> -->
 			<div class="ingredients-stack"></div>
 			<h2 class="price"></h2>
 			<div class="outer-border">
@@ -49,7 +50,7 @@
 					<div class="fade-bottom"></div>
 					<div class="price-and-order">
 
-						<div id="10" class="order-btn ingredient"><h2>Next</h2></div>
+						<div id="10" class="order-btn ingredient"><h2>Put a lid on it</h2></div>
 					</div>
 				</div>
 				<div class="second right">
@@ -57,8 +58,10 @@
 						<h2>SIDE ORDERS</h2>
 						<p>Would you like soda and fries with that?</p>
 					</div>
-					<div class="side-order off" id="12">Fries</div>
-					<div class="side-order off" id="13">Drink</div>
+					<div class="side-orders">
+						<div class="side-order off" id="12">Fries</div>
+						<div class="side-order off" id="13">Drink</div>
+					</div>
 					<div class="price-and-order">
 						<div class="payment-btn"><h2>Delivery</h2></div>
 					</div>
@@ -69,9 +72,12 @@
 						<p>Enter your delivery address</p>
 					</div>
 					<div class="delivery-info">
-						<input type="text" placeholder="Name"></input>
-						<input type="text" placeholder="Adress"></input>
-						<input type="text" placeholder="Email"></input>
+						<input id="delivery-name" type="text" placeholder="Name"></input>
+						<input id="delivery-address" type="text" placeholder="Adress"></input>
+						<input id="delivery-email" type="email" placeholder="Email"></input>
+					</div>
+					<div class="side-orders">
+						<div class="pay-on-delivery off" id="12">Pay on delivery</div>
 					</div>
 					<div class="price-and-order">
 						<div class="final-btn"><h2>Order</h2></div>

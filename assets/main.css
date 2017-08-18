@@ -1,5 +1,6 @@
 * {
     margin: 0;
+    cursor: default;
 }
 body {
     font-family: 'Fugaz One', cursive;
@@ -46,6 +47,9 @@ body {
     width:600px;
     z-index: 102;
     text-align: center;
+    font-size: 1.3em;
+    letter-spacing: .02em;
+    cursor: pointer;
 }
 .fp-btn {
     position: relative;
@@ -122,6 +126,9 @@ canvas {
     background-color: rgba(255,255,255,0);
     transition: background-color .3s ease
 }
+.ingredient h4{
+    cursor: pointer;
+}
 .ingredient:not(.order-btn){
     margin-right: 3vw;
 }
@@ -161,10 +168,11 @@ canvas {
 
 .first, .second, .third {
     width:40vw;
+    height:80vh;
     position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .ingredients>.ingredient:hover {
@@ -208,6 +216,18 @@ canvas {
     z-index: 250;
     top:10vh;
     left: 2vw;
+    transform: scale(1);
+    transition: transform .2s;
+    cursor: pointer;
+}
+.burger-menu-text {
+    height:3em;
+    position: absolute;
+    z-index: 251;
+    top:10vh;
+    left: 5em;
+    display: flex;
+    align-items: center;
 }
 .ingredients-stack {
     display: none;
@@ -232,7 +252,22 @@ canvas {
 }
 
 .side-order {
+    width:50%;
+    display: flex;
+    justify-content: center;
+    border: black 1px solid;
+}
+
+.side-order.on {
+    background-color: rgba(254, 184, 89, .5);
+}
+
+.side-orders {
     margin:0 15% 5% 15%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-bottom: auto;
 }
 
 .price-and-order {
@@ -247,6 +282,7 @@ canvas {
     cursor: pointer;
 }
 
+
 .price {
     display: flex;
     align-items: center;
@@ -257,20 +293,26 @@ canvas {
     right: 43vw;
     width: 5em;
     height: 5em;
-    background-image: url("./price.svg");
+    background-image: url("./price.png");
     background-size: cover;
     background-repeat: no-repeat;
-    filter: invert();
 }
 
-.order-btn {
-    width: 40%;
+.order-btn,.payment-btn,.final-btn {
+    width: 100%;
+    height:100%;
     display: flex;
     justify-content: center;
+    align-items: center;
+    cursor: pointer;
 
 }
 .order-btn h2,.payment-btn h2,.final-btn h2 {
     color: rgba(254, 236, 128,1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 
 }
 
@@ -287,6 +329,18 @@ canvas {
     border-bottom: black 2px solid;
     font-size: 1em;
     margin-bottom: 1em;
+    outline: none;
+}
+
+.pay-on-delivery {
+    width:100%;
+    display: flex;
+    justify-content: center;
+    border: black 1px solid;
+}
+
+.pay-on-delivery.on {
+    background-color: rgba(254, 184, 89, .5);
 }
 
 #final-modal {
@@ -315,4 +369,36 @@ canvas {
     text-align: center;
 
 
+}
+
+
+#backend-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.order {
+    width:30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: black 5px solid;
+    margin-left: 5vw;
+    align-self: left;
+    transition: margin-left 1s;
+    border-top-left-radius: 2em;
+    border-top-right-radius: 2em;
+}
+
+.order h3{
+    width:100%;
+    border-bottom: black solid 5px;
+    text-align: center;
+}
+
+.order p {
+    font-family: sans-serif;
+    align-self: flex-start;
+    margin-bottom:1em;
 }

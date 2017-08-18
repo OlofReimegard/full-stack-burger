@@ -10,7 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.4",
+    "http": "0.0.0",
+    "socket.io": "^2.0.3",
     "three-mtl-loader": "^1.0.1",
     "three-obj-loader": "^1.1.2"
   }

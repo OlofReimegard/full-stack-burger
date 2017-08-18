@@ -13,7 +13,7 @@ $(document).ready(function(){
     var camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
     scene.add( camera );
     camera.position.z = 200
-    camera.position.y = 65;
+    camera.position.y = 55;
     camera.position.x = 70
 
 
@@ -274,7 +274,14 @@ $(document).ready(function(){
             $("#outer-border").hide().fadeIn();
 
         }
-        $(".ingredient").click(addIngredient);
+        $(".ingredient").click(function(e){
+            addIngredient(e);
+            $(".burger-menu").css("transform","scale(1.5)").delay(200).queue(function (next) {
+                $(this).css("transform","scale(1)");
+                next();
+
+            });
+        });
         $(".burger-menu").click(function(){
             if($(".burger-menu").hasClass("burger-off")){
                 $(".burger-menu").addClass("burger-on").removeClass("burger-off");
@@ -305,20 +312,49 @@ $(document).ready(function(){
 
             });
         });
+        function post(order) {
+            $.ajax({
+                type: "POST",
+                url: "/order",
+                data: order
+            });
+        }
 
         $(".payment-btn").click(function(){
             $(".second").removeClass("center").addClass("left");
             $(".third").removeClass("right").addClass("center");
 
-
-            $(".final-btn").click(function() {
-                $("<div id='final-modal'><h1>Your burger is being made and will be delivered to your address ASAP!<br> Thank you for choosing Full Stack Burger </h1></div>").appendTo($("body")).fadeIn().css("display","flex");
-                var order = ingredientsList.filter((ingredient) => {
-                    return !ingredient[4];
-                });
-                console.log(order);
-                $.post("/order",{order:order});
+            $(".pay-on-delivery").click(function(e) {
+                if(e.target !== this && $(e.currentTarget).hasClass("off")) {
+                    $(e.currentTarget).removeClass("off").addClass("on");
+                } else if (e.target == this && $(e.target).hasClass("off")) {
+                    $(e.target).removeClass("off").addClass("on");
+                }
             });
+
+            $(".final-btn").unbind("click").click(function() {
+                $("<div id='final-modal'><h1>Your burger is being made and will be delivered to your address ASAP!<br> Thank you for choosing Full Stack Burger </h1></div>").appendTo($("body")).fadeIn().css("display","flex");
+                var order =ingredientsList.map((ingredient) => {
+                    var orderVals = [ingredient[2],ingredient[3],ingredient[4]];
+                    return orderVals;}).filter((ingredient) => {
+                        return ingredient[2] != "removed";
+                    });
+                var delivery = []
+                delivery.push(["name", $("#delivery-name").val()]);
+                delivery.push(["address", $("#delivery-address").val()]);
+                delivery.push(["email", $("#delivery-email").val()]);
+                delivery.push(["payment method", "On delivery"]);
+                console.log(JSON.stringify(order));
+                // order = JSON.stringify(order);
+                if(order&&delivery){
+                    post({
+                        order:JSON.stringify(order),
+                        delivery: JSON.stringify(delivery)
+                    });
+
+                }
+            });
+            return false;
         });
 
 

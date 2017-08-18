@@ -31,7 +31,7 @@ var loadBBun = new Promise(function(resolve, reject) {
         });
         bottomBun = object;
         bottomBun.price = .5;
-        bottomBun.name = "Bun";
+        bottomBun.name = "Bottom bun";
         console.log(bottomBun);
         bottomBunBox = new THREE.Box3().setFromObject(object);
         bottomBunBox = (bottomBunBox.max.y - bottomBunBox.min.y);
@@ -200,6 +200,7 @@ var loadTopBun = new Promise(function(resolve, reject) {
         object.position.y = moveUp;
         topBun = object;
         topBun.price = 0;
+        topBun.name = "Top-bun";
         topBunBox = new THREE.Box3().setFromObject(object);
         topBunBox = (topBunBox.max.y - topBunBox.min.y);
         topBun.height = topBunBox;
