@@ -12,6 +12,10 @@ body {
     display: flex;
 }
 
+h4 {
+    letter-spacing: .05em;
+}
+
 .fp {
     position: absolute;
     overflow: visible;
