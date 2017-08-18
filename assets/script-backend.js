@@ -1,25 +1,27 @@
-(function(){
-    const socket = io.connect();
-    socket.on("welcome",function(data) {
+"use strict";
+
+(function () {
+    var socket = io.connect();
+    socket.on("welcome", function (data) {
         console.log(data.message);
-        socket.emit("thanks",{message: 'thanks yo'});
+        socket.emit("thanks", { message: 'thanks yo' });
     });
 
-    socket.on("order",function(data) {
+    socket.on("order", function (data) {
         console.log("order recieved");
         console.log(data.order);
         var order = {
-            burger:[],
-            fries:false,
-            soda:false,
-            price:0
+            burger: [],
+            fries: false,
+            soda: false,
+            price: 0
         };
 
-        Array.from(data.order).forEach((thing) => {
+        Array.from(data.order).forEach(function (thing) {
             console.log("orderorderorder");
-            if(thing[0] == "soda") {
+            if (thing[0] == "soda") {
                 order.soda = true;
-            } else if(thing[0] == "fries") {
+            } else if (thing[0] == "fries") {
                 order.fries = true;
             } else {
                 order.burger.unshift(thing[0]);
@@ -28,22 +30,19 @@
         });
 
         var htmlBurger = "<div class='order'>";
-        order.burger.forEach((item) => {
-            var ingredientName = "<h3 class='backend-burger-item'>"+item+"</h3>";
+        order.burger.forEach(function (item) {
+            var ingredientName = "<h3 class='backend-burger-item'>" + item + "</h3>";
             htmlBurger += ingredientName;
-
         });
 
-        data.delivery.forEach((item) => {
-            var deliveryInfo = "<p >"+item[0]+":"+item[1]+"</p>";
+        data.delivery.forEach(function (item) {
+            var deliveryInfo = "<p >" + item[0] + ":" + item[1] + "</p>";
             htmlBurger += deliveryInfo;
-        })
+        });
 
         $(htmlBurger).appendTo($("body"));
-        $(".order").click(()=>{
-            $(".order").css("margin-left","65vw");
+        $(".order").click(function () {
+            $(".order").css("margin-left", "65vw");
         });
-
     });
-
 })();
