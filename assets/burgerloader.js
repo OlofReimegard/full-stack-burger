@@ -15,7 +15,8 @@ const materials = {
     ketchup: new THREE.MeshPhongMaterial({color: 0xb70721, shininess: 50}),
     szechuan: new THREE.MeshPhongMaterial({color: 0x6d311d, shininess: 50}),
     salad: new THREE.MeshPhongMaterial({color: 0x3d990c,shininess: 50}),
-    onion: new THREE.MeshPhongMaterial({color: 0xe9e4c8, shininess: 50})
+    onion: new THREE.MeshPhongMaterial({color: 0xe9e4c8, shininess: 50}),
+    packaging: new THREE.MeshLambertMaterial({color: 0xff2b2b})
 };
 let bottomBun,bottomBunBox;
 var loadBBun = new Promise(function(resolve, reject) {
@@ -355,7 +356,7 @@ var loadFries = new Promise(function(resolve, reject) {
 
         object.traverse(function(child) {
             if (child instanceof THREE.Mesh) {
-                child.material = materials.onion;
+                child.material = materials.packaging;
                 child.shading = THREE.SmoothShading;
 
             }
@@ -399,7 +400,7 @@ var loadSoda = new Promise(function(resolve, reject) {
 
         object.traverse(function(child) {
             if (child instanceof THREE.Mesh) {
-                child.material = materials.ketchup;
+                child.material = materials.packaging;
                 child.shading = THREE.SmoothShading;
 
             }

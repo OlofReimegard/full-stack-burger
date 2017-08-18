@@ -389,6 +389,8 @@ canvas {
     transition: margin-left 1s;
     border-top-left-radius: 2em;
     border-top-right-radius: 2em;
+    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 .order h3{

@@ -29,18 +29,18 @@ $(document).ready(function(){
         return degree*(Math.PI/180);
     }
 
-    var keyLight = new THREE.DirectionalLight( 0xf4f4f4, 1.2 );
+    var keyLight = new THREE.DirectionalLight( 0xf4f4f4, 1.4 );
     keyLight.position.set( -30, 50, 20 );
     keyLight.target.position.set( 0, 0, 0 );
     scene.add( keyLight );
 
-    var fillLight = new THREE.DirectionalLight( 0xf4f4f4, .2 );
-    fillLight.position.set( 30, 30, 20 );
+    var fillLight = new THREE.DirectionalLight( 0xf4f4f4, .3 );
+    fillLight.position.set( 30, 30, -20 );
     fillLight.target.position.set( 0, 0, 0 );
 
     scene.add( fillLight);
 
-    var fillLight2 = new THREE.DirectionalLight( 0xf4f4f4, .5 );
+    var fillLight2 = new THREE.DirectionalLight( 0xf4f4f4, .7 );
     fillLight2.position.set( 100,1,0 );
     fillLight2.target.position.set( 0, 0.5, 0 );
     scene.add( fillLight2);
@@ -169,8 +169,8 @@ $(document).ready(function(){
             var position = {y: 200};
             var target = {y: 5};
             if(ingredient == soda) {
-                position.x = -95;
-                target.x = -95;
+                position.x = -97;
+                target.x = -97;
                 position.z = -30;
                 target.z = -30;
             } else {
