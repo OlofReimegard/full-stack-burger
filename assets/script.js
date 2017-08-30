@@ -40,7 +40,7 @@ $(document).ready(function () {
     //
     var stackIngredient, stackHeight;
     /**promise all loading all the assets**/
-    Promise.all([loadSalad, loadHalloumi,loadPatty,loadSoda,loadFries,loadOnion,loadPickles,loadBBun,loadCheese,loadTopBun,loadUpperSauce, loadKetchup, loadSzechuan,loadTomatoes]).then(function (values) {
+    Promise.all([loadSalad,loadHalloumi,loadPatty,loadSoda,loadFries,loadOnion,loadPickles,loadBBun,loadCheese,loadTopBun,loadUpperSauce, loadKetchup, loadSzechuan,loadTomatoes]).then(function (values) {
         /**fade out loading text and launch first page**/
         $(".load-img").fadeOut();
         $(".fp").fadeIn(1500).css("display", "flex");
@@ -53,7 +53,7 @@ $(document).ready(function () {
         /**array used for selecting random ingredients for the start page **/
         var ingredientsArr = [bottomBun, salad, patty, halloumi, cheese, tomatoes, pickles, upperSauce, szechuan, ketchup, topBun, onion];
 
-        /**with reference to the imported mesh, and the box for calculating its height **/
+        /**array with reference to the imported ingredient meshes, and the box for calculating its height **/
         var stackArr = [
         [bottomBun, bottomBunBox], //0
         [salad, saladBox], //1
@@ -71,6 +71,7 @@ $(document).ready(function () {
         [soda] //14
         ];
 
+        /**function for dropping random ingredients in random locations in the background of the first page**/
         function dropThing(ingredient) {
             var newingredient = ingredient.clone();
             scene.add(newingredient);
@@ -90,8 +91,10 @@ $(document).ready(function () {
         };
 
 
-
+        /**array used for keeping track of ingredients on the burger**/
         var ingredientsList = [];
+
+        /**function used for stacking ingredients on burger**/
         function stackIngredient(ingredient, ingredientBox) {
             var newingredient = ingredient.clone();
             newingredient.height = ingredient.height;
@@ -112,6 +115,7 @@ $(document).ready(function () {
             tween.start();
             $("<p class='burger-menu-item' id='" + newingredient.number + "'>" + newingredient.name + "</p>").prependTo($(".ingredients-stack"));
 
+            /**eventhandler for removing ingredients from burger and calculating height of new ingredients**/
             $(".burger-menu-item").unbind("click").click(function (e) {
                 removeMesh(ingredientsList[e.target.id][0]);
                 moveDown(e.target.id, ingredientsList[e.target.id][0].height);
@@ -119,10 +123,14 @@ $(document).ready(function () {
                 ingredientsList[e.target.id].push("removed");
                 $(e.target).remove();
             });
+
+            /**updating price and height of next ingredient to be stacked**/
             price += ingredient.price;
             $(".price").text(price + " €");
             stackHeight += ingredientBox;
         }
+
+        /**function for removing ingredient and updating price**/
         function removeMesh(mesh) {
             var position = { x: 0 };
             var target = { x: -200 };
@@ -137,6 +145,8 @@ $(document).ready(function () {
             price -= mesh.price;
             $(".price").text(price + " €");
         }
+
+        /**function for moving down ingredients previously placed on top of removed ingredient**/
         function moveDown(number, height) {
             ingredientsList.forEach(function (item) {
 
@@ -151,6 +161,8 @@ $(document).ready(function () {
                 }
             });
         };
+
+        /**function for adding fries and/or shake**/
         function addSide(ingredient) {
 
             var newingredient = ingredient.clone();
@@ -218,6 +230,7 @@ $(document).ready(function () {
                 });
             }
             var fpAnimation = requestAnimationFrame(fpRender);
+
             $(".fp-logo").click(function () {
                 setTimeout(function () {
                     clearInterval(dropInterval);
@@ -225,8 +238,10 @@ $(document).ready(function () {
             });
             renderer.render(scene, camera);
         }
+
         $(renderer.domElement).appendTo($("body"));
         fpRender();
+
         var dropInterval = setInterval(function () {
             var randIng = Math.floor(Math.random() * 8 + 0);
             dropIngredient(ingredientsArr[randIng]);
@@ -263,8 +278,7 @@ $(document).ready(function () {
             $(".fp").css({ "top": "-100vh" });
             $("body").css({ "background-position": "center" });
             $(".burger").delay(900).fadeIn("slow");
-            //FIXA HÄR!!
-            // $("body").css("background-image","url('/background2.jpg')");
+
             setTimeout(function () {
                 $(".outer-border").css("right", "0vw");
                 clearInterval(dropInterval);
@@ -293,7 +307,7 @@ $(document).ready(function () {
         $(".order-btn").click(function () {
             $(".first").removeClass("center").addClass("left");
             $(".second").removeClass("right").addClass("center");
-
+            $(".burger-menu").fadeOut();
             $(".side-order").click(function (e) {
                 var numbers;
                 if (e.target !== this && $(e.currentTarget).hasClass("off")) {
