@@ -1,6 +1,6 @@
 'use strict';
 
-var OBJloader = new THREE.OBJLoader();
+var OBMloader = new THREE.OBMLoader();
 
 var moveUp = 100;
 
@@ -23,7 +23,7 @@ var bottomBun = void 0,
     bottomBunBox = void 0;
 var loadBBun = new Promise(function (resolve, reject) {
 
-    OBJloader.load('./bottombun.obj', function (object) {
+    OBMloader.load('./bottombun.obm', function (object) {
 
         object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
@@ -47,7 +47,7 @@ var patty = void 0,
     pattyBox = void 0;
 var loadPatty = new Promise(function (resolve, reject) {
 
-    OBJloader.load('./patty.obj', function (object) {
+    OBMloader.load('./patty.obm', function (object) {
 
         object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
@@ -74,7 +74,7 @@ var halloumi = void 0,
     halloumiBox = void 0;
 var loadHalloumi = new Promise(function (resolve, reject) {
 
-    OBJloader.load('./patty.obj', function (object) {
+    OBMloader.load('./patty.obm', function (object) {
 
         object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
@@ -101,7 +101,7 @@ var cheese = void 0,
     cheeseBox = void 0;
 var loadCheese = new Promise(function (resolve, reject) {
 
-    OBJloader.load('./cheese.obj', function (object) {
+    OBMloader.load('./cheese.obm', function (object) {
 
         object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
@@ -125,7 +125,7 @@ var pickles = void 0,
     picklesBox = void 0;
 var loadPickles = new Promise(function (resolve, reject) {
 
-    OBJloader.load('./pickles.obj', function (object) {
+    OBMloader.load('./pickles.obm', function (object) {
 
         object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
@@ -149,7 +149,7 @@ var tomatoes = void 0,
     tomatoesBox = void 0;
 var loadTomatoes = new Promise(function (resolve, reject) {
 
-    OBJloader.load('./tomatoes.obj', function (object) {
+    OBMloader.load('./tomatoes.obm', function (object) {
 
         object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
@@ -173,7 +173,7 @@ var topBun = void 0,
     topBunBox = void 0;
 var loadTopBun = new Promise(function (resolve, reject) {
 
-    OBJloader.load('./topbun.obj', function (object) {
+    OBMloader.load('./topbun.obm', function (object) {
 
         object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
@@ -197,7 +197,7 @@ var salad = void 0,
     saladBox = void 0;
 var loadSalad = new Promise(function (resolve, reject) {
 
-    OBJloader.load('./salad.obj', function (object) {
+    OBMloader.load('./salad.obm', function (object) {
 
         object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
@@ -220,7 +220,7 @@ var upperSauce = void 0,
     upperSauceBox = void 0;
 var loadUpperSauce = new Promise(function (resolve, reject) {
 
-    OBJloader.load('./uppersauce.obj', function (object) {
+    OBMloader.load('./uppersauce.obm', function (object) {
 
         object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
@@ -244,7 +244,7 @@ var ketchup = void 0,
     ketchupBox = void 0;
 var loadKetchup = new Promise(function (resolve, reject) {
 
-    OBJloader.load('./uppersauce.obj', function (object) {
+    OBMloader.load('./uppersauce.obm', function (object) {
 
         object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
@@ -266,7 +266,7 @@ var loadKetchup = new Promise(function (resolve, reject) {
 var szechuan,szechuanBox;
 var loadSzechuan = new Promise(function (resolve, reject) {
 
-    OBJloader.load('./uppersauce.obj', function (object) {
+    OBMloader.load('./uppersauce.obm', function (object) {
 
         object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
@@ -290,7 +290,7 @@ var onion = void 0,
     onionBox = void 0;
 var loadOnion = new Promise(function (resolve, reject) {
 
-    OBJloader.load('./onion.obj', function (object) {
+    OBMloader.load('./onion.obm', function (object) {
 
         object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
@@ -317,7 +317,7 @@ var loadFries = new Promise(function (resolve, reject) {
 
     fries = new THREE.Object3D();
 
-    OBJloader.load('./friesbox.obj', function (object) {
+    OBMloader.load('./friesbox.obm', function (object) {
 
         object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
@@ -328,7 +328,7 @@ var loadFries = new Promise(function (resolve, reject) {
 
         fries.add(object);
 
-        OBJloader.load('./fries.obj', function (object) {
+        OBMloader.load('./fries.obm', function (object) {
 
             object.traverse(function (child) {
                 if (child instanceof THREE.Mesh) {
@@ -352,7 +352,7 @@ var loadSoda = new Promise(function (resolve, reject) {
 
     soda = new THREE.Object3D();
 
-    OBJloader.load('./cup.obj', function (object) {
+    OBMloader.load('./cup.obm', function (object) {
 
         object.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
@@ -363,7 +363,7 @@ var loadSoda = new Promise(function (resolve, reject) {
 
         soda.add(object);
 
-        OBJloader.load('./lid.obj', function (object) {
+        OBMloader.load('./lid.obm', function (object) {
 
             object.traverse(function (child) {
                 if (child instanceof THREE.Mesh) {
@@ -373,7 +373,7 @@ var loadSoda = new Promise(function (resolve, reject) {
             });
 
             soda.add(object);
-            OBJloader.load('./straw.obj', function (object) {
+            OBMloader.load('./straw.obm', function (object) {
 
                 object.traverse(function (child) {
                     if (child instanceof THREE.Mesh) {

@@ -2,23 +2,19 @@
 
 $(document).ready(function () {
 
+    /**scene**/
     var scene = new THREE.Scene();
-
+    /**renderer**/
+    var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setClearColor(0x000000, 0);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    /**camera**/
     var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
     scene.add(camera);
     camera.position.z = 200;
     camera.position.y = 55;
     camera.position.x = 70;
-
-    var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setClearColor(0x000000, 0);
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
-
-    function de2ra(degree) {
-        return degree * (Math.PI / 180);
-    }
-
+    /**lights**/
     var keyLight = new THREE.DirectionalLight(0xf4f4f4, 1.4);
     keyLight.position.set(-30, 50, 20);
     keyLight.target.position.set(0, 0, 0);
@@ -35,15 +31,47 @@ $(document).ready(function () {
     fillLight2.target.position.set(0, 0.5, 0);
     scene.add(fillLight2);
 
-    var moveThing, stackHeight;
 
-    Promise.all([loadSalad, loadHalloumi, loadUpperSauce, loadKetchup, loadSzechuan, loadBBun, loadPatty, loadCheese, loadPickles, loadTomatoes, loadTopBun, loadOnion, loadFries, loadSoda]).then(function (values) {
+
+    function de2ra(degree) {
+        return degree * (Math.PI / 180);
+    }
+
+    //
+    var stackIngredient, stackHeight;
+    /**promise all loading all the assets**/
+    Promise.all([loadSalad, loadHalloumi,loadPatty,loadSoda,loadFries,loadOnion,loadPickles,loadBBun,loadCheese,loadTopBun,loadUpperSauce, loadKetchup, loadSzechuan,loadTomatoes]).then(function (values) {
+        /**fade out loading text and launch first page**/
         $(".load-img").fadeOut();
         $(".fp").fadeIn(1500).css("display", "flex");
-        stackHeight = bottomBunBox;
 
+        /**set height where first chosen ingredient should land, height of the bottom bun**/
+        stackHeight = bottomBunBox;
+        /**set starting price, this is altered in the **/
+        var price = 0
+
+        /**array used for selecting random ingredients for the start page **/
         var ingredientsArr = [bottomBun, salad, patty, halloumi, cheese, tomatoes, pickles, upperSauce, szechuan, ketchup, topBun, onion];
-        var dropThing = function dropThing(ingredient) {
+
+        /**with reference to the imported mesh, and the box for calculating its height **/
+        var stackArr = [
+        [bottomBun, bottomBunBox], //0
+        [salad, saladBox], //1
+        [patty, pattyBox], //2
+        [cheese, cheeseBox], //3
+        [tomatoes, tomatoesBox], //4
+        [pickles, picklesBox], //5
+        [upperSauce, upperSauceBox], //6
+        [ketchup, ketchupBox], //7
+        [szechuan, szechuanBox], //8
+        [onion, onionBox], //9
+        [topBun, topBunBox],//11
+        [halloumi, halloumiBox],//12
+        [fries],//13
+        [soda] //14
+        ];
+
+        function dropThing(ingredient) {
             var newingredient = ingredient.clone();
             scene.add(newingredient);
             var xPos = Math.floor(Math.random() * 480 + -240);
@@ -60,28 +88,16 @@ $(document).ready(function () {
 
             tween.start();
         };
-        var price = 0;
-        var stackArr = [[bottomBun, bottomBunBox], //0
-        [salad, saladBox], //1
-        [patty, pattyBox], //2
-        [cheese, cheeseBox], //3
-        [tomatoes, tomatoesBox], //4
-        [pickles, picklesBox], //5
-        [upperSauce, upperSauceBox], //6
-        [ketchup, ketchupBox], //7
-        [szechuan, szechuanBox], //8
-        [onion, onionBox], //9
-        [topBun, topBunBox], [halloumi, halloumiBox], [fries], [soda] //10
-        ];
+
+
+
         var ingredientsList = [];
-        moveThing = function moveThing(ingredient, ingredientBox) {
-            console.log(ingredientsList);
+        function stackIngredient(ingredient, ingredientBox) {
             var newingredient = ingredient.clone();
             newingredient.height = ingredient.height;
             newingredient.price = ingredient.price;
             newingredient.number = ingredientsList.length;
             ingredientsList.push([newingredient, newingredient.number, newingredient.name, newingredient.price]);
-            console.log("once");
             scene.add(newingredient);
 
             var position = { y: 100 };
@@ -97,7 +113,6 @@ $(document).ready(function () {
             $("<p class='burger-menu-item' id='" + newingredient.number + "'>" + newingredient.name + "</p>").prependTo($(".ingredients-stack"));
 
             $(".burger-menu-item").unbind("click").click(function (e) {
-                console.log("once here", e.target);
                 removeMesh(ingredientsList[e.target.id][0]);
                 moveDown(e.target.id, ingredientsList[e.target.id][0].height);
                 stackHeight -= ingredientsList[e.target.id][0].height;
@@ -107,8 +122,8 @@ $(document).ready(function () {
             price += ingredient.price;
             $(".price").text(price + " €");
             stackHeight += ingredientBox;
-        };
-        var removeMesh = function removeMesh(mesh) {
+        }
+        function removeMesh(mesh) {
             var position = { x: 0 };
             var target = { x: -200 };
             var tween = new TWEEN.Tween(position).to(target, 1500);
@@ -121,13 +136,11 @@ $(document).ready(function () {
             tween.start();
             price -= mesh.price;
             $(".price").text(price + " €");
-            // scene.remove(mesh);
-        };
-        var moveDown = function moveDown(number, height) {
+        }
+        function moveDown(number, height) {
             ingredientsList.forEach(function (item) {
 
                 if (item[1] > number) {
-                    console.log(item[0].position.y, item[0].position.y - height);
                     var position = { y: item[0].position.y };
                     var target = { y: item[0].position.y - height };
                     var tween = new TWEEN.Tween(position).to(target, 200);
@@ -138,7 +151,7 @@ $(document).ready(function () {
                 }
             });
         };
-        var addSide = function addSide(ingredient) {
+        function addSide(ingredient) {
 
             var newingredient = ingredient.clone();
             newingredient.number = ingredientsList.length;
@@ -181,7 +194,7 @@ $(document).ready(function () {
             $(".price").text(price + " €");
         };
 
-        var fpRender = function fpRender() {
+        function fpRender() {
 
             TWEEN.update();
             if ($(".burger").css("display") == "none") {
@@ -211,26 +224,14 @@ $(document).ready(function () {
                 }, 500);
             });
             renderer.render(scene, camera);
-        };
+        }
         $(renderer.domElement).appendTo($("body"));
         fpRender();
         var dropInterval = setInterval(function () {
             var randIng = Math.floor(Math.random() * 8 + 0);
             dropIngredient(ingredientsArr[randIng]);
         }, 1000);
-        $(".fp-btn").click(function () {
 
-            $(".fp").css({ "top": "-100vh" });
-            $("body").css({ "background-position": "center" });
-            $(".burger").delay(900).fadeIn("slow");
-            //FIXA HÄR!!
-            // $("body").css("background-image","url('/background2.jpg')");
-            setTimeout(function () {
-                $(".outer-border").css("right", "0vw");
-                clearInterval(dropInterval);
-                moveThing(bottomBun, bottomBunBox);
-            }, 1200);
-        });
 
         function dropIngredient(e) {
             dropThing(e);
@@ -245,9 +246,32 @@ $(document).ready(function () {
                 numbers = e.target.id;
             }
 
-            moveThing(stackArr[numbers][0], stackArr[numbers][1]);
+            stackIngredient(stackArr[numbers][0], stackArr[numbers][1]);
             $("#outer-border").hide().fadeIn();
         }
+
+        function post(order) {
+            $.ajax({
+                type: "POST",
+                url: "/order",
+                data: order
+            });
+        }
+
+        $(".fp-btn").click(function () {
+
+            $(".fp").css({ "top": "-100vh" });
+            $("body").css({ "background-position": "center" });
+            $(".burger").delay(900).fadeIn("slow");
+            //FIXA HÄR!!
+            // $("body").css("background-image","url('/background2.jpg')");
+            setTimeout(function () {
+                $(".outer-border").css("right", "0vw");
+                clearInterval(dropInterval);
+                stackIngredient(bottomBun, bottomBunBox);
+            }, 1200);
+        });
+
         $(".ingredient").click(function (e) {
             addIngredient(e);
             $(".burger-menu").css("transform", "scale(1.5)").delay(200).queue(function (next) {
@@ -255,6 +279,7 @@ $(document).ready(function () {
                 next();
             });
         });
+
         $(".burger-menu").click(function () {
             if ($(".burger-menu").hasClass("burger-off")) {
                 $(".burger-menu").addClass("burger-on").removeClass("burger-off");
@@ -282,13 +307,7 @@ $(document).ready(function () {
                 }
             });
         });
-        function post(order) {
-            $.ajax({
-                type: "POST",
-                url: "/order",
-                data: order
-            });
-        }
+
 
         $(".payment-btn").click(function () {
             $(".second").removeClass("center").addClass("left");
@@ -315,8 +334,6 @@ $(document).ready(function () {
                 delivery.push(["address", $("#delivery-address").val()]);
                 delivery.push(["email", $("#delivery-email").val()]);
                 delivery.push(["payment method", "On delivery"]);
-                console.log(JSON.stringify(order));
-                // order = JSON.stringify(order);
                 if (order && delivery) {
                     post({
                         order: JSON.stringify(order),
